@@ -4,12 +4,16 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content="" />
-		<title>buscar Request</title>
+		<title>STALKER - Buscar Request</title>
+
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 		<script
 			src="https://kit.fontawesome.com/268c979937.js"
 			crossorigin="anonymous"
 		></script>
+
+		<script src="/js/custom.js"></script>
 
 		<link
 			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
@@ -59,14 +63,15 @@
 		<main class="form-signin w-100 m-auto">
 			<form>
 				<i class="fa-solid fa-user-secret fa-9x"></i>
-				<h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+				<h1 class="h3 mb-3 fw-normal">STALKER</h1>
 
 				<div class="form-floating">
 					<input
 						type="text"
 						class="form-control"
-						id="floatingInput"
+						id="user"
 						placeholder="fulano.sidia"
+						required
 					/>
 					<label for="floatingInput">ID Samsung</label>
 				</div>
@@ -76,6 +81,7 @@
 						class="form-control"
 						id="date-initial"
 						placeholder="Data Inicial"
+						required
 					/>
 					<label for="floatingPassword">Data Inicial</label>
 				</div>
@@ -85,8 +91,15 @@
 						class="form-control"
 						id="date-final"
 						placeholder="Data Final"
+						required
 					/>
 					<label for="floatingPassword">Data Final</label>
+				</div>
+
+				<div class="verifier-date-feedback">
+					<p class="invalid-feedback" style="display: none">
+						Datas inválidas e/ou Usuário não encontrado!
+					</p>
 				</div>
 
 				<div class="checkbox mb-3">
@@ -94,10 +107,21 @@
 						<input type="checkbox" value="remember-me" /> Remember me
 					</label>
 				</div>
-				<button class="w-100 btn btn-lg btn-primary" type="submit">
+				<button
+					id="search-button"
+					class="w-100 btn btn-lg btn-primary"
+					type="button"
+					onclick="buscarRequest()"
+				>
 					Buscar
 				</button>
-				<button class="w-100 btn btn-lg btn-primary" type="button" disabled>
+				<button
+					id="loading-button"
+					class="w-100 btn btn-lg btn-primary"
+					type="button"
+					style="display: none"
+					disabled
+				>
 					<span
 						class="spinner-grow spinner-grow-sm"
 						role="status"
@@ -105,8 +129,43 @@
 					></span>
 					<span class="sr-only">Loading...</span>
 				</button>
-				<p class="mt-5 mb-3 text-muted">&copy; 2023</p>
+				<p class="mt-5 mb-3 text-muted">&copy; SIDIA - 2023</p>
 			</form>
+
+			<!-- Modal -->
+			<div
+				class="modal fade"
+				id="exampleModal"
+				tabindex="-1"
+				aria-labelledby="exampleModalLabel"
+				aria-hidden="true"
+			>
+				<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="exampleModalLabel">
+								Resultados da Busca
+							</h1>
+							<button
+								type="button"
+								class="btn-close"
+								data-bs-dismiss="modal"
+								aria-label="Close"
+							></button>
+						</div>
+						<div class="modal-body">...</div>
+						<div class="modal-footer">
+							<button
+								type="button"
+								class="btn btn-secondary"
+								data-bs-dismiss="modal"
+							>
+								Voltar
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
 		</main>
 
 		<script
