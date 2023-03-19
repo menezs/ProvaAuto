@@ -28,7 +28,7 @@ function buscarRequest() {
 			verifierCampos.style.display = "none";
 			document.getElementById("search-button").style.display = "block";
 			document.getElementById("loading-button").style.display = "none";
-		}, 5000);
+		}, 3000);
 	} else {
 		verifierCampos.style.display = "block";
 		document.getElementById("search-button").style.display = "block";
